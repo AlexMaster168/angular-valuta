@@ -1,0 +1,77 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$currency-exchange-red: (
+	50: #ffebee,
+	100: #ffcdd2,
+	200: #ef9a9a,
+	300: #e57373,
+	400: #ef5350,
+	500: #f44336,
+	600: #e53935,
+	700: #d32f2f,
+	800: #c62828,
+	900: #b71c1c,
+	A100: #c70d38,
+	A200: #ff5252,
+	A400: #ff1744,
+	A700: #d50000,
+	contrast: (
+		50: rgba(black, 0.87),
+		100: rgba(black, 0.87),
+		200: rgba(black, 0.87),
+		300: rgba(black, 0.87),
+		400: rgba(black, 0.87),
+		500: white,
+		600: white,
+		700: white,
+		800: white,
+		900: white,
+		A100: rgba(black, 0.87),
+		A200: white,
+		A400: white,
+		A700: white,
+	)
+);
+
+$currency-exchange-green: (
+	50: #f1f8e9,
+	100: #dcedc8,
+	200: #c5e1a5,
+	300: #aed581,
+	400: #9ccc65,
+	500: #8bc34a,
+	600: #7cb342,
+	700: #689f38,
+	800: #558b2f,
+	900: #33691e,
+	A100: #94c720,
+	A200: #b2ff59,
+	A400: #76ff03,
+	A700: #64dd17,
+	contrast: (
+		50: rgba(black, 0.87),
+		100: rgba(black, 0.87),
+		200: rgba(black, 0.87),
+		300: rgba(black, 0.87),
+		400: rgba(black, 0.87),
+		500: rgba(black, 0.87),
+		600: rgba(black, 0.87),
+		700: white,
+		800: white,
+		900: white,
+		A100: rgba(black, 0.87),
+		A200: rgba(black, 0.87),
+		A400: rgba(black, 0.87),
+		A700: rgba(black, 0.87),
+	)
+);
+
+$currency-exchange-app-primary: mat.define-palette(mat.$teal-palette);
+$currency-exchange-app-accent: mat.define-palette($currency-exchange-green, A100, A200, A400);
+$currency-exchange-app-warn: mat.define-palette($currency-exchange-red, A100);
+
+$currency-exchange-app-theme: mat.define-light-theme($currency-exchange-app-primary, $currency-exchange-app-accent, $currency-exchange-app-warn);
+
+@include mat.all-component-themes($currency-exchange-app-theme);
