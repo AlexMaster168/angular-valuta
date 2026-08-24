@@ -1,5 +1,10 @@
 /.angular/cache
 
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
 # Created by https://www.gitignore.io/api/macos,linux,eclipse,windows,sublimetext,visualstudiocode
 
 ### Eclipse ###
@@ -316,3 +321,4 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/grunt
+.vercel

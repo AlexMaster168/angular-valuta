@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { MappedCurrencyRateObject } from '../interface/exchange-rates.model';
@@ -17,7 +17,7 @@ export interface PeriodicHistoryElement {
 }
 
 @Injectable()
-export class CurrencyExchangeService implements OnInit {
+export class CurrencyExchangeService {
     converterForm: UntypedFormGroup = new UntypedFormGroup({
         amountControl: new UntypedFormControl('', [Validators.required]),
         fromControl: new UntypedFormControl('', [Validators.required, Validators.minLength(2)]),
@@ -31,48 +31,26 @@ export class CurrencyExchangeService implements OnInit {
     fromCurrencies: string[] = [];
     toCurrencies: string[] = [];
 
-    currentDate: string;
-    currentTime: string;
     isValid = false;
     isServiceReferral = false;
 
-    static toTwoDigits(givenNumber: number) {
-        return givenNumber > 9 ? `${givenNumber}` : `0${givenNumber}`;
+    toggleServiceReferral(): void {
+        this.isServiceReferral = !this.isServiceReferral;
     }
-
-    constructor() {}
-
-    ngOnInit() {}
 
     getCurrentDate(separator: string): string {
         const now = new Date();
-
-        const currentDay = now.getDate();
-        const currentMonth = now.getMonth() + 1;
-        const currentYear = now.getFullYear();
-
-        this.currentDate = [currentDay, currentMonth, currentYear]
-            .map(CurrencyExchangeService.toTwoDigits)
-            .join(separator);
-
-        return this.currentDate;
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        return `${day}${separator}${month}${separator}${year}`;
     }
 
     getCurrentTime(separator: string): string {
         const now = new Date();
-
-        const currentHour = now.getHours();
-        const currentMinute = now.getMinutes();
-        const currentSecond = now.getSeconds();
-
-        this.currentTime = [currentHour, currentMinute, currentSecond]
-            .map(CurrencyExchangeService.toTwoDigits)
-            .join(separator);
-
-        return this.currentTime;
-    }
-
-    toggleServiceReferral() {
-        return (this.isServiceReferral = !this.isServiceReferral);
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${hours}${separator}${minutes}${separator}${seconds}`;
     }
 }

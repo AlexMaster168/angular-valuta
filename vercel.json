@@ -1,0 +1,6 @@
+{
+  "installCommand": "corepack enable && pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm run build:prod",
+  "outputDirectory": "dist/client/browser",
+  "framework": "angular"
+}

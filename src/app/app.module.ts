@@ -12,8 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
+import { NgxLoadingBar } from '@ngx-loading-bar/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +24,7 @@ import { CoreModule } from './core/core.module';
 import { ExchangeRatesApiRequestService } from './shared/service/exchange-rates-api-request.service';
 import { CurrencyExchangeService } from './shared/service/currency-exchange.service';
 import { environment } from '../environments/environment';
-import {HistoryComponent} from './components/history/history.component';
+import { HistoryComponent } from './components/history/history.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,7 +35,6 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         BrowserModule,
         HttpClientModule,
-        LoadingBarHttpClientModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         AuthModule,
@@ -47,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
         MatSelectModule,
         MatTableModule,
         MatAutocompleteModule,
+        NgxLoadingBar,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -56,8 +56,11 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
-    providers: [ExchangeRatesApiRequestService, CurrencyExchangeService],
+    providers: [
+        ExchangeRatesApiRequestService,
+        CurrencyExchangeService,
+        provideLoadingBarInterceptor(),
+    ],
     bootstrap: [AppComponent],
 })
-// @ts-ignore
 export class AppModule {}

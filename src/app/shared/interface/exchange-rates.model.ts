@@ -3,7 +3,7 @@ export interface StringNumberPair {
 }
 
 export interface ExchangeRatesResponse {
-    base: string;
+    base_code: string;
     rates: StringNumberPair;
 }
 

@@ -14,7 +14,7 @@ export enum AlertType {
 
 @Injectable()
 export class AlertService {
-    private subject = new Subject<Alert>();
+    private subject = new Subject<Alert | null>();
     private keepAfterRouteChange = false;
 
     constructor(private router: Router) {
@@ -30,7 +30,7 @@ export class AlertService {
         });
     }
 
-    getAlert(): Observable<any> {
+    getAlert(): Observable<Alert | null> {
         return this.subject.asObservable();
     }
 
@@ -48,6 +48,6 @@ export class AlertService {
     }
 
     clear() {
-        this.subject.next();
+        this.subject.next(null);
     }
 }

@@ -6,6 +6,7 @@ import { Alert, AlertService, AlertType } from './alert.service';
     selector: 'app-alert',
     templateUrl: 'alert.component.html',
     styleUrls: ['alert.component.scss'],
+    standalone: false,
 })
 export class AlertComponent implements OnInit {
     alerts: Alert[] = [];
@@ -27,9 +28,9 @@ export class AlertComponent implements OnInit {
         this.alerts = this.alerts.filter((item) => item !== alert);
     }
 
-    cssClass(alert: Alert) {
+    cssClass(alert: Alert): string {
         if (!alert) {
-            return;
+            return '';
         }
 
         switch (alert.type) {
